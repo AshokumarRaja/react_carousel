@@ -10,7 +10,7 @@ import PropTypes from 'prop-types'
  * @returns {JSX} - Returns respone in jsx
  */
 const Button = (props) => {
-    const { index, onClick, children, disabled,className } = props;
+    const { index, onClick, children, disabled, className } = props;
     return (
         <StyledButton
             className={className}
@@ -25,9 +25,9 @@ const Button = (props) => {
 export default Button;
 
 Button.propTypes = {
-    className :PropTypes.string,
-    index     : PropTypes.number.isRequired,
-    onClick  : PropTypes.func.isRequired,
-    children : PropTypes.any.isRequired,
-    disabled : PropTypes.bool 
+    className: PropTypes.string,
+    index: PropTypes.number.isRequired,
+    onClick: PropTypes.func.isRequired,
+    children: PropTypes.any.isRequired,
+    disabled: PropTypes.bool
 }

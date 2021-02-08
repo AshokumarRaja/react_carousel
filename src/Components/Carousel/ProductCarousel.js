@@ -1,6 +1,6 @@
-import React, { useState,useRef,useEffect } from 'react'
+import React, { useState } from 'react'
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'
-import { Slide, Slider, SliderContent, Carousel,Description,SlideImg } from './Styles';
+import { Slide, Slider, SliderContent, Carousel, Description, SlideImg } from './Styles';
 import Button from '../Button/Button';
 import PropTypes from 'prop-types';
 import Dots from '../Dots/Dots'
@@ -13,7 +13,7 @@ import Dots from '../Dots/Dots'
  * @returns {JSX}   - Returns response in jsx
  */
 const ProductCarousel = (props) => {
-    const { images, cardCount, imageSize,transitionType } = props;
+    const { images, cardCount, imageSize, transitionType } = props;
     const [currentIndex, setCurrentIndex] = useState(0); //Specify the Current Index Of Card
     const [translate, setTranslate] = useState(0);
     let cardsArray;
@@ -32,16 +32,18 @@ const ProductCarousel = (props) => {
         })
     )
     return (
-        <Carousel>
-            <Slider imageSize={imageSize} imageCount={cardCount}>
-                <SliderContent translate={translate} width={imageSize * images.length} imageCount={currentIndex} transition={transitionType}>
-                    {cardsArray}
-                </SliderContent>
-            </Slider>
-            <Button className="left" onClick={changeIndex} children={<FaAngleLeft />} disabled={currentIndex == 0 ? true : false} index={-cardCount} />
-            <Button className="right" onClick={changeIndex} children={<FaAngleRight />} disabled={currentIndex + cardCount == images.length ? true : false} index={cardCount} />
-            <Dots dotsCount={(images.length/cardCount)} activeIndex={currentIndex/cardCount}/>
-        </Carousel>
+        images.length > 1 && (
+            <Carousel>
+                <Slider imageSize={imageSize} imageCount={cardCount}>
+                    <SliderContent translate={translate} width={imageSize * images.length} imageCount={currentIndex} transition={transitionType} >
+                        {cardsArray}
+                    </SliderContent>
+                </Slider>
+                <Button className="left" onClick={changeIndex} children={<FaAngleLeft />} disabled={currentIndex == 0 ? true : false} index={-cardCount} />
+                <Button className="right" onClick={changeIndex} children={<FaAngleRight />} disabled={currentIndex + cardCount <= images.length - cardCount ? false : true} index={cardCount} />
+                <Dots dotsCount={(images.length / cardCount)} activeIndex={currentIndex / cardCount} />
+            </Carousel>
+        )
     )
 }
 
@@ -55,5 +57,6 @@ ProductCarousel.propTypes = {
         })
     ),
     imageSize: PropTypes.number,
-    cardCount: PropTypes.number.isRequired
+    cardCount: PropTypes.number.isRequired,
+    transitionType: PropTypes.string
 }

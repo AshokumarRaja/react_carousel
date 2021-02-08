@@ -8,8 +8,9 @@ import PropTypes from 'prop-types'
  * @returns {JSX}   - Returns response in jsx
  */
 const Dots = (props) => {
-    const { dotsCount, activeIndex } = props;
+    let { dotsCount, activeIndex } = props;
     const [dotsArray, setDotsArray] = useState([]);
+    dotsCount = Math.floor(dotsCount);
     useEffect(() => {
         setDotsArray([]);
         for (let i = 0; i < dotsCount; i++) {

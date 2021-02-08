@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import {Transitions} from '../../Constants/TransitionConstant';
+
 const DEFAULT_SIZE = 250;
 
 export const Slider = styled.div`
