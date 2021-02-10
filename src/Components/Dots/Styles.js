@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const StyledDotsConatiner = styled.div`
     position: absolute;
-    bottom: 150px;
     height:50px;
     width: inherit;
     display: flex;
