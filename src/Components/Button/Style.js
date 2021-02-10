@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 
 export const StyledButton =styled.button`
-  padding: 15px;
-  background-color: #fff;
-  cursor: pointer;
-  z-index: 100;
-  margin:10px;
-  &.left  {
-    position:absolute;
-    left:0;
-  }
-  &.right  {
-    position:absolute;
-    right:0;
-  }
+position:absolute;
+top:30%;
+cursor: pointer;
+z-index: 100;
+outline:none;
+padding:10px;
+background-color:#fff;
+&.left  {
+  left:20px;
+}
+&.right  {
+  right:20px;
+}
 `
     
     

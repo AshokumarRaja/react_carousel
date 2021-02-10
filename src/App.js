@@ -3,7 +3,7 @@ import { CarouselConstantData } from './Constants/CarouselConstantData'
 function App() {
   return (
     <>
-      <ProductCarousel images={CarouselConstantData} cardCount={4} imageSize={200} transitionType="easeIn" />
+      <ProductCarousel images={CarouselConstantData} cardCount={4} cardChange={2} transitionType="easeIn" sliderHeight={200}  />
     </>
   );
 }

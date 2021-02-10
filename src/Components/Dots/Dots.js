@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { StyledDotsConatiner, StyledDot } from './Styles';
 import PropTypes from 'prop-types'
 /** 
- * 
+ * Dots Function  from  Progress bars
  * @param props.dotsCount - Number of Dots in the Carousel
  * @param props.activeIndex - Active Card Index
  * @returns {JSX}   - Returns response in jsx

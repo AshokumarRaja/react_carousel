@@ -1,47 +1,47 @@
 import React, { useState } from 'react'
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'
-import { Slide, Slider, SliderContent, Carousel, Description, SlideImg } from './Styles';
+import { Slide, Slider, SliderContent, Carousel, SlideImg } from './Styles';
 import Button from '../Button/Button';
 import PropTypes from 'prop-types';
 import Dots from '../Dots/Dots'
 /** 
- * ProductCarousel function from 
+ * ProductCarousel function given from Carousel 
+ * @param props.sliderHeight - Set the Height of Carousel
  * @param props.images - Array of images
  * @param props.cardCount - Number of cards Show by Default
- * @param props.imageSize - Set The Card Width and Height
+ * @param props.cardChange - Number of Card Changes by Default
  * @param props.transitionType - Set The Transition Style of Carousel
  * @returns {JSX}   - Returns response in jsx
  */
 const ProductCarousel = (props) => {
-    const { images, cardCount, imageSize, transitionType } = props;
+    const { images, cardCount, transitionType, cardChange,sliderHeight } = props;
     const [currentIndex, setCurrentIndex] = useState(0); //Specify the Current Index Of Card
-    const [translate, setTranslate] = useState(0);
-    let cardsArray;
-    const changeIndex = (index) => {
+    const changeIndex = (index) => {    
         setCurrentIndex(prevstate => prevstate + index);
-        setTranslate((currentIndex + index) * imageSize);
     }
-    images.length > 1 && (
-        cardsArray = images.map((image, index) => {
-            return (
-                <Slide imageSize={imageSize}>
-                    <SlideImg key={index} src={image.src} imageSize={imageSize}></SlideImg>
-                    <Description>{image.desc}</Description>
-                </Slide>
-            )
-        })
-    )
+    const items = images.slice(currentIndex, currentIndex + cardCount);
     return (
         images.length > 1 && (
             <Carousel>
-                <Slider imageSize={imageSize} imageCount={cardCount}>
-                    <SliderContent translate={translate} width={imageSize * images.length} imageCount={currentIndex} transition={transitionType} >
-                        {cardsArray}
-                    </SliderContent>
+                <Slider sliderHeight={sliderHeight}>
+                    {images.map((image, index) => {
+                        const classString = currentIndex + cardChange <= index ? "next" : currentIndex > index ? "prev" : "active";
+                        return (
+                            <SliderContent key={index} className={`SliderCarousel  ${classString}`} cardChange={cardChange} transitionType={transitionType}>
+                                {items.map((item) => {
+                                    return (
+                                        <Slide className={`SlideImg`} >
+                                            <SlideImg key={index} src={item.src}></SlideImg>
+                                        </Slide>
+                                    )
+                                })}
+                            </SliderContent>
+                        )
+                    })}
+                    <Button className="left" onClick={changeIndex} children={<FaAngleLeft />} disabled={currentIndex == 0 ? true : false} index={-cardChange} />
+                    <Button className="right" onClick={changeIndex} children={<FaAngleRight />} disabled={currentIndex + cardChange < images.length  ? false : true} index={cardChange} />
                 </Slider>
-                <Button className="left" onClick={changeIndex} children={<FaAngleLeft />} disabled={currentIndex == 0 ? true : false} index={-cardCount} />
-                <Button className="right" onClick={changeIndex} children={<FaAngleRight />} disabled={currentIndex + cardCount <= images.length - cardCount ? false : true} index={cardCount} />
-                <Dots dotsCount={(images.length / cardCount)} activeIndex={currentIndex / cardCount} />
+                <Dots dotsCount={(images.length / cardChange)} activeIndex={currentIndex / cardChange} />
             </Carousel>
         )
     )
@@ -56,7 +56,8 @@ ProductCarousel.propTypes = {
             desc: PropTypes.any
         })
     ),
-    imageSize: PropTypes.number,
+    cardChange: PropTypes.number.isRequired,
     cardCount: PropTypes.number.isRequired,
-    transitionType: PropTypes.string
+    transitionType: PropTypes.string,
+    sliderHeight:PropTypes.number
 }
