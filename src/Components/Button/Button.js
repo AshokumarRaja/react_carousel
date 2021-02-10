@@ -2,6 +2,7 @@ import React from 'react';
 import { StyledButton } from './Style';
 import PropTypes from 'prop-types'
 /**
+ * Button Function gives Butoon Component
  * @param props.className - className of The Button
  * @param props.index    - Number of Cards add/remove based on button
  * @param props.children - Children of The button Component

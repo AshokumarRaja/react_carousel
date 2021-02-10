@@ -5,7 +5,7 @@ import Button from '../Button/Button';
 import PropTypes from 'prop-types';
 import Dots from '../Dots/Dots'
 /** 
- * ProductCarousel function given from Carousel 
+ * ProductCarousel function gives Carousel Slider
  * @param props.sliderHeight - Set the Height of Carousel
  * @param props.images - Array of images
  * @param props.cardCount - Number of cards Show by Default
